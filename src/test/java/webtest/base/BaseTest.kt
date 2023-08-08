@@ -6,6 +6,11 @@ class BaseTest : AbstractTestNew() {
 
     @Test
     fun exampleTest() {
-        login().validateLoggedIn()
+        acceptCookies()
+        selectMenu()
+        selectOption()
+        selectFilter()
+        addToBasket()
+
     }
 }
