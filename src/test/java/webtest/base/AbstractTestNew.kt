@@ -7,6 +7,7 @@ import org.testng.ITestResult
 import org.testng.annotations.*
 import webtest.page.app.LoginPage
 import webtest.page.app.MainPage
+import webtest.page.app.ProductSelectPage
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
@@ -42,12 +43,53 @@ abstract class AbstractTestNew {
     /**
      * Zmínit se jak to lze napsat jinak za pouziti core selenia Webdriver, rozdil mezi fce run/let/also ...
      */
-    fun login(): MainPage {
-        LoginPage().run {
-            fillLogin(PropertiesData.getUsername(), PropertiesData.getPassword())
-            clickOnLoginButton()
-        }
+
+
+    fun acceptCookies(): MainPage {
+
+        val mainPage = MainPage()
+        mainPage.eatCookies()
+
         return MainPage()
+    }
+
+    fun selectMenu(): ProductSelectPage {
+        val productSelectPage = ProductSelectPage()
+        productSelectPage.clickOnMenu()
+            return ProductSelectPage()
+
+    }
+
+    fun selectOption(): ProductSelectPage {
+
+        val productSelectPage = ProductSelectPage()
+        productSelectPage.clickOnOption()
+        return ProductSelectPage()
+
+    }
+
+    fun selectFilter(): ProductSelectPage{
+
+        val productSelectPage = ProductSelectPage()
+        productSelectPage.clickFilter()
+        return ProductSelectPage()
+
+    }
+
+    fun onStore(): ProductSelectPage{
+
+        val productSelectPage = ProductSelectPage()
+        productSelectPage.clickOnStore()
+        return ProductSelectPage()
+
+    }
+
+    fun addToBasket(): ProductSelectPage{
+
+        val productSelectPage = ProductSelectPage()
+        productSelectPage.clickAddToBasket()
+        return ProductSelectPage()
+
     }
 
 

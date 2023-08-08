@@ -12,15 +12,8 @@ class MainPage : AbstractTechnicalPage() {
         TODO("Not yet implemented")
     }
 
-    private val logo: ElementDef = ElementDef(ComponentType.PAGE_LOGO, "Swag Labs", By.className("app_logo"))
+    private val cookies: ElementDef = ElementDef(ComponentType.ANY, "Přijmout", By.xpath("//a[contains(text(),'Rozumím')]"))
 
-    fun validateLoggedIn() {
-        if (!elements().isDisplayed(logo)) {
-            fail(
-                of(this).message("Uživateli se nepodažilo přihlásit nebo se nezobrazilo logo na stránce").element(logo)
-                    .build()
-            )
-        }
-    }
+fun eatCookies()= elements().performClick(cookies)
 
 }
