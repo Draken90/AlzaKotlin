@@ -246,6 +246,10 @@ public class Elements extends AbstractElementProvider {
         return element.getAttribute(VALUE_ATTR);
     }
 
+    public String getElementText(WebElement element) {
+        return element.getText();
+    }
+
     /**
      * Use this if u need to ensure only 1 element on page.
      *

@@ -4,16 +4,29 @@ import org.testng.annotations.Test
 
 class BaseTest : AbstractTestNew() {
 
+
     @Test
     fun exampleTest() {
+        currentPrice = 0
+        budget = generateBudget()
+        leftover = calculateLeftover()
         acceptCookies()
-        selectMenu()
-        Thread.sleep(2000)
-        selectOption()
-        onStore()
-        selectFilter()
-        Thread.sleep(2000)
-        addToBasket()
-        Thread.sleep(10000)
+        while(productPrice < leftover){
+            val productNumber = decideProduct()
+            val virtualProduct = isVirtual()
+            if (!virtualProduct) {
+                productPrice = getProductPrice(productNumber)
+                leftover = calculateLeftover()
+                if (productPrice < leftover) {
+                    buyProduct(productNumber)
+                    currentPrice = calculateCurrentPrice()
+                }
+            }
+            returnToMainPage()
+
+        }
+        printResults()
+
     }
+
 }

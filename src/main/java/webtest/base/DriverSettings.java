@@ -19,7 +19,7 @@ import static webtest.base.PropertiesData.getUrl;
 
 public class DriverSettings {
 
-    private static WebDriver driver;
+    public static WebDriver driver;
     private static Logger logger = LoggerFactory.getLogger(DriverSettings.class);
     protected static final String USERNAME = "georgehope1";
     protected static final String AUTOMATE_KEY = "BzRyA435eK5NAsSfyP3T";

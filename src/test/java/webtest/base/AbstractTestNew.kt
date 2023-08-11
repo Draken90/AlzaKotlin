@@ -5,16 +5,21 @@ import org.openqa.selenium.OutputType
 import org.openqa.selenium.TakesScreenshot
 import org.testng.ITestResult
 import org.testng.annotations.*
-import webtest.page.app.LoginPage
 import webtest.page.app.MainPage
 import webtest.page.app.ProductSelectPage
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.random.Random
 
 abstract class AbstractTestNew {
 
+
+    var productPrice = 0
+    var leftover = 1000
+    var budget = 1000
+    var currentPrice = 1
     @BeforeMethod
     fun initializeDriver() = DriverSettings.initializeDriver()
 
@@ -44,7 +49,23 @@ abstract class AbstractTestNew {
      * Zmínit se jak to lze napsat jinak za pouziti core selenia Webdriver, rozdil mezi fce run/let/also ...
      */
 
+     fun calculateLeftover(): Int {
+        leftover = budget - currentPrice
+        return leftover
+    }
 
+    fun generateBudget(): Int{
+
+        budget = Random.nextInt(100000)
+        println("Budget je $budget")
+        return budget
+
+    }
+
+    fun calculateCurrentPrice(): Int{
+        currentPrice += productPrice
+        return currentPrice
+    }
     fun acceptCookies(): MainPage {
 
         val mainPage = MainPage()
@@ -53,44 +74,56 @@ abstract class AbstractTestNew {
         return MainPage()
     }
 
-    fun selectMenu(): ProductSelectPage {
+    fun getProductPrice(prodNum: Number): Int {
+        val productSelectPage = ProductSelectPage()
+        return productSelectPage.getPriceOfProduct(prodNum)
+    }
+
+
+    fun decideProduct(): Int {
         val productSelectPage = ProductSelectPage()
         productSelectPage.clickOnMenu()
-            return ProductSelectPage()
-
-    }
-
-    fun selectOption(): ProductSelectPage {
-
-        val productSelectPage = ProductSelectPage()
+        Thread.sleep(5000)
+        closeAdd()
         productSelectPage.clickOnOption()
-        return ProductSelectPage()
-
-    }
-
-    fun selectFilter(): ProductSelectPage{
-
-        val productSelectPage = ProductSelectPage()
-        productSelectPage.clickFilter()
-        return ProductSelectPage()
-
-    }
-
-    fun onStore(): ProductSelectPage{
-
-        val productSelectPage = ProductSelectPage()
+        Thread.sleep(2000)
         productSelectPage.clickOnStore()
-        return ProductSelectPage()
-
+        Thread.sleep(2000)
+        productSelectPage.checkOnlyNew()
+        Thread.sleep(2000)
+        productSelectPage.clickFilter()
+        Thread.sleep(5000)
+        return productSelectPage.decideProduct()
     }
 
-    fun addToBasket(): ProductSelectPage{
-
+    fun isVirtual(): Boolean {
         val productSelectPage = ProductSelectPage()
-        productSelectPage.clickAddToBasket()
-        return ProductSelectPage()
-
+        return productSelectPage.checkVirtual()
     }
+
+
+        fun buyProduct(prodOrder:Number): ProductSelectPage{
+            val productSelectPage = ProductSelectPage()
+            Thread.sleep(5000)
+            productSelectPage.clickAddtoBasket(prodOrder)
+
+        return ProductSelectPage()
+    }
+
+    fun returnToMainPage(): ProductSelectPage{
+        val productSelectPage = ProductSelectPage()
+        productSelectPage.returnToMainPage()
+        return ProductSelectPage()
+    }
+
+    private fun closeAdd(): ProductSelectPage {
+        val productSelectPage = ProductSelectPage()
+        productSelectPage.closeAdvert()
+        return ProductSelectPage()
+    }
+
+    fun printResults() = println("Cílová cena byla $budget, Celková cena nákupu činí $currentPrice a zbylo $leftover KČ")
+
 
 
 }
