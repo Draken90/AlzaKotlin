@@ -97,26 +97,10 @@ abstract class AbstractTestNew {
         return MainPage()
     }
 
-    fun getProductPrice(prodNum: Number): Int {
-        val ResultsPage = ResultsPage()
-        return ResultsPage.getPriceOfProduct(prodNum)
-    }
 
 
-    fun decideProduct(): Int {
 
-        Thread.sleep(5000)
-        closeAdd()
-        ResultsPage.clickOnOption()
-        Thread.sleep(2000)
-        ResultsPage.clickOnStore()
-        Thread.sleep(2000)
-        ResultsPage.checkOnlyNew()
-        Thread.sleep(2000)
-        ResultsPage.clickFilter()
-        Thread.sleep(5000)
-        return ResultsPage.decideProduct()
-    }
+
 
     fun isVirtual(): Boolean {
         val ResultsPage = ResultsPage()
