@@ -11,7 +11,7 @@ class BaseTest : AbstractTestNew() {
         budget = generateBudget()
         leftover = calculateLeftover()
         acceptCookies()
-        while(productPrice < leftover){
+/*        while(productPrice < leftover){
             val productNumber = decideProduct()
             val virtualProduct = isVirtual()
             if (!virtualProduct) {
@@ -22,9 +22,10 @@ class BaseTest : AbstractTestNew() {
                     currentPrice = calculateCurrentPrice()
                 }
             }
+
             returnToMainPage()
 
-        }
+        }*/
         printResults()
 
     }
