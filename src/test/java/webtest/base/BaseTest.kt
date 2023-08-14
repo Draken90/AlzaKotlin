@@ -2,8 +2,8 @@ package webtest.base
 
 import org.testng.annotations.Test
 
-class BaseTest : AbstractTestNew() {
 
+class BaseTest : AbstractTestNew() {
 
     @Test
     fun exampleTest() {
@@ -26,6 +26,19 @@ class BaseTest : AbstractTestNew() {
 
         }
         printResults()
+
+    }
+
+    @Test
+    fun test2(){
+
+
+        acceptCookies()
+        clickRandomLeftMenuItem()
+        closeAdd()
+        goThroughCatalog()
+
+
 
     }
 

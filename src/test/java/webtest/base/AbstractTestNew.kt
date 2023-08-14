@@ -5,8 +5,11 @@ import org.openqa.selenium.OutputType
 import org.openqa.selenium.TakesScreenshot
 import org.testng.ITestResult
 import org.testng.annotations.*
+import webtest.base.step.CatalogPageTestStep
+import webtest.base.step.LeftMenuPageTestStep
+import webtest.base.step.RandomizerTestStep
 import webtest.page.app.MainPage
-import webtest.page.app.ProductSelectPage
+import webtest.page.app.ResultsPage
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
@@ -15,6 +18,11 @@ import kotlin.random.Random
 
 abstract class AbstractTestNew {
 
+    val mainPage = MainPage()
+    val leftMenuTestStep = LeftMenuPageTestStep()
+    val randomizer = RandomizerTestStep()
+    val catalogPageTestStep = CatalogPageTestStep()
+    val ResultsPage = ResultsPage()
 
     var productPrice = 0
     var leftover = 1000
@@ -49,7 +57,9 @@ abstract class AbstractTestNew {
      * Zmínit se jak to lze napsat jinak za pouziti core selenia Webdriver, rozdil mezi fce run/let/also ...
      */
 
-     fun calculateLeftover(): Int {
+
+
+    fun calculateLeftover(): Int {
         leftover = budget - currentPrice
         return leftover
     }
@@ -66,60 +76,71 @@ abstract class AbstractTestNew {
         currentPrice += productPrice
         return currentPrice
     }
+
+    fun goThroughCatalog(){
+        while ((catalogPageTestStep.countOptionsForRandomize())>-1){
+            catalogPageTestStep.clickOnCatalogOption(randomizer.randomizeSelection(catalogPageTestStep.countOptionsForRandomize()))
+        }
+
+    }
+
+    fun clickRandomLeftMenuItem(){
+        leftMenuTestStep.clickOnLeftMenuOption(randomizer.randomizeSelection(leftMenuTestStep.countItemsForRandomize()))
+
+    }
+
     fun acceptCookies(): MainPage {
 
-        val mainPage = MainPage()
+
         mainPage.eatCookies()
 
         return MainPage()
     }
 
     fun getProductPrice(prodNum: Number): Int {
-        val productSelectPage = ProductSelectPage()
-        return productSelectPage.getPriceOfProduct(prodNum)
+        val ResultsPage = ResultsPage()
+        return ResultsPage.getPriceOfProduct(prodNum)
     }
 
 
     fun decideProduct(): Int {
-        val productSelectPage = ProductSelectPage()
-        productSelectPage.clickOnMenu()
+
         Thread.sleep(5000)
         closeAdd()
-        productSelectPage.clickOnOption()
+        ResultsPage.clickOnOption()
         Thread.sleep(2000)
-        productSelectPage.clickOnStore()
+        ResultsPage.clickOnStore()
         Thread.sleep(2000)
-        productSelectPage.checkOnlyNew()
+        ResultsPage.checkOnlyNew()
         Thread.sleep(2000)
-        productSelectPage.clickFilter()
+        ResultsPage.clickFilter()
         Thread.sleep(5000)
-        return productSelectPage.decideProduct()
+        return ResultsPage.decideProduct()
     }
 
     fun isVirtual(): Boolean {
-        val productSelectPage = ProductSelectPage()
-        return productSelectPage.checkVirtual()
+        val ResultsPage = ResultsPage()
+        return ResultsPage.checkVirtual()
     }
 
 
-        fun buyProduct(prodOrder:Number): ProductSelectPage{
-            val productSelectPage = ProductSelectPage()
+        fun buyProduct(prodOrder:Number): ResultsPage{
+            val ResultsPage = ResultsPage()
             Thread.sleep(5000)
-            productSelectPage.clickAddtoBasket(prodOrder)
+            ResultsPage.clickAddtoBasket(prodOrder)
 
-        return ProductSelectPage()
+        return ResultsPage()
     }
 
-    fun returnToMainPage(): ProductSelectPage{
-        val productSelectPage = ProductSelectPage()
-        productSelectPage.returnToMainPage()
-        return ProductSelectPage()
+    fun returnToMainPage(): ResultsPage{
+        val ResultsPage = ResultsPage()
+        ResultsPage.returnToMainPage()
+        return ResultsPage()
     }
 
-    private fun closeAdd(): ProductSelectPage {
-        val productSelectPage = ProductSelectPage()
-        productSelectPage.closeAdvert()
-        return ProductSelectPage()
+    fun closeAdd(): ResultsPage {
+            catalogPageTestStep.getRidOfAdvert()
+        return ResultsPage()
     }
 
     fun printResults() = println("Cílová cena byla $budget, Celková cena nákupu činí $currentPrice a zbylo $leftover KČ")
