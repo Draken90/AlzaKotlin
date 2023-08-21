@@ -21,6 +21,10 @@ public class PropertiesData {
         return getPropertiesFile().getProperty("data.login.nickname");
     }
 
+    public static String getProductName() {
+        return getPropertiesFile().getProperty("data.product.name");
+    }
+
     public static String getUrl() {
         return getPropertiesFile().getProperty("application.url");
     }

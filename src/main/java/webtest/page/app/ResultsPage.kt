@@ -20,6 +20,8 @@ class ResultsPage : AbstractTechnicalPage() {
     var browsingItem = ElementDef(ComponentType.ANY,"",By.xpath("//div[contains(@class,'inStockAvailability')]"))
     var listOfProducts: MutableList<String> = mutableListOf()
 
+    public var virtualToCart: ElementDef = ElementDef(ComponentType.ANY, "Digitální obsah do Košíku", By.xpath("//a[@data-testid='hlAddToCart']"))
+    public var buttonGoToCart: ElementDef = ElementDef(ComponentType.BUTTON, "Přejít do košíku", By.xpath("//a[@href='https://www.alza.cz/Order1.htm']"))
 
     fun checkVirtual(): Boolean {
 

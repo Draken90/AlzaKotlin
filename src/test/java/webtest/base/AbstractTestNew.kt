@@ -60,7 +60,13 @@ abstract class AbstractTestNew {
      * Zmínit se jak to lze napsat jinak za pouziti core selenia Webdriver, rozdil mezi fce run/let/also ...
      */
 
+    fun sInput(): MainPage {
+        val searchInput = MainPage()
+        searchInput.fillSearch(PropertiesData.getProductName())
+        searchInput.clickOnSearchButton()
 
+        return MainPage()
+    }
 
     fun calculateLeftover(): Int {
         leftover = budget - currentPrice

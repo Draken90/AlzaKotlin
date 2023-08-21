@@ -10,7 +10,6 @@ class CatalogPage: AbstractTechnicalPage(){
     override fun isOpen(): Boolean {
         TODO("Not yet implemented")
     }
-
     fun countClickableObjects():Int{
 
         val catalogObject: ElementDef = ElementDef(ComponentType.BUTTON,"Catalog Button", By.className("catalogLocalTitlePage-alz-4"))

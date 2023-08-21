@@ -1,9 +1,11 @@
 package webtest.base
 
 import org.testng.annotations.Test
+import webtest.base.step.MainPageStep
 
 
 class BaseTest : AbstractTestNew() {
+    val test2Step = MainPageStep()
 
     /*@Test
     fun exampleTest() {
@@ -52,5 +54,10 @@ class BaseTest : AbstractTestNew() {
 
 
     }
-
+//Test2 manuál
+    @Test
+    fun test3(){
+        test2Step.findProduct()
+        sInput()
+    }
 }
