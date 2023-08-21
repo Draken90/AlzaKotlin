@@ -9,6 +9,7 @@ import webtest.base.step.CatalogPageTestStep
 import webtest.base.step.LeftMenuPageTestStep
 import webtest.base.step.RandomizerTestStep
 import webtest.base.step.ResultsPageTestStep
+import webtest.base.step.ShoppingCartPageTestStep
 import webtest.page.app.MainPage
 import webtest.page.app.ResultsPage
 import java.io.File
@@ -24,6 +25,7 @@ abstract class AbstractTestNew {
     val randomizer = RandomizerTestStep()
     val catalogPageTestStep = CatalogPageTestStep()
     val resultsPageTestStep = ResultsPageTestStep()
+    val shoppingCartPageTestStep = ShoppingCartPageTestStep()
 
     var productPrice = 0
     var leftover = 1000
@@ -108,18 +110,20 @@ abstract class AbstractTestNew {
         resultsPageTestStep.addRandomNonVirtualProductToCart(randomizer.randomizeSelection(resultsPageTestStep.countItemsForRandomize()))
     }
 
-
-
-
-
-
-    fun anyVirtualObjects(): Boolean {
-
-        return resultsPageTestStep.anyVirtualProducts()
+    fun buyRandomAnyProduct(){
+        resultsPageTestStep.addAnyRandomProductToCart(randomizer.randomizeSelection(resultsPageTestStep.countItemsForRandomize()))
     }
 
+
+
+
+
+
+
+
     fun filterNewAndOnStore(){
-        if (!anyVirtualObjects()){
+        val virtualObjects = resultsPageTestStep.anyVirtualProducts()
+        if (!virtualObjects){
             selectOnStore()
             selectOnlyNew()
         }
@@ -136,6 +140,16 @@ abstract class AbstractTestNew {
     fun returnToMainPage(): MainPage{
         resultsPageTestStep.returnToMainPage()
         return MainPage()
+    }
+    
+    fun goToShoppingCart(){
+        resultsPageTestStep.clickOnGoToCartButton()
+    }
+
+
+    fun verifySameProductsPresent(){
+        val result = shoppingCartPageTestStep.verifySameProductsArePresent()
+        println("Výsledek verifikace je $result")
     }
 
     fun printResults() = println("Cílová cena byla $budget, Celková cena nákupu činí $currentPrice a zbylo $leftover KČ")

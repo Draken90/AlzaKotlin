@@ -9,27 +9,40 @@ import org.openqa.selenium.WebElement
 
 
 class ResultsPage : AbstractTechnicalPage() {
-    override fun isOpen(): Boolean {
-        TODO("Not yet implemented")
-    }
+    override fun isOpen(): Boolean = elements().findElement(alzaHome).isDisplayed
 
     private var electronicProduct: ElementDef = ElementDef(ComponentType.ANY, "Virtual product", By.xpath("//div[contains(@class,'inStockAvailability virtual')]"))
     private var onStore: ElementDef = ElementDef(ComponentType.ANY, "Na Skladě", By.xpath("//div[@data-testid='alza-and-partner-branches']"))
-    private var addToBasketUni: ElementDef = ElementDef(ComponentType.BUTTON, "Do Košíku", By.xpath("//div[contains(@class,'inStockAvailability')]//a[@class='btnk1'and contains(@href,'boxOrder')]"))
-    var toBasket = ElementDef(ComponentType.ANY,"Do Košíku",By.xpath("(//div[contains(@class,'inStockAvailability')])[1]//a[@class='btnk1'and contains(@href,'boxOrder')]"))
+    private var addToCartUni: ElementDef = ElementDef(ComponentType.BUTTON, "Do Košíku", By.xpath("//div[contains(@class,'inStockAvailability')]//a[@class='btnk1'and contains(@href,'boxOrder')]"))
+    var toCart = ElementDef(ComponentType.ANY,"Do Košíku",By.xpath("(//div[contains(@class,'inStockAvailability')])[1]//a[@class='btnk1'and contains(@href,'boxOrder')]"))
     private val alzaHome: ElementDef = ElementDef(ComponentType.ANY, "Alza Homepage", By.xpath("//a[contains(@title,'Přejít na hlavní stránku')]"))
     private val onlyNewProduct: ElementDef = ElementDef(ComponentType.ANY, "Jen nové", By.id("hlCommodityStatusNew"))
+    var browsingItem = ElementDef(ComponentType.ANY,"",By.xpath("//div[contains(@class,'inStockAvailability')]"))
+    var listOfProducts: MutableList<String> = mutableListOf()
 
 
     fun checkVirtual(): Boolean {
 
-    val element = elements().findElement(toBasket)
+    val element = elements().findElement(toCart)
         val virtualCheck = element.getAttribute("class")
         var virtual = virtualCheck.contains("virtual")
         return virtual
 
 
 
+    }
+
+    fun getProductId(ProdNum: Int): MutableList<String>{
+        val allMatchingElements: List<WebElement> = elements().findElements(browsingItem)
+        val productID = allMatchingElements[ProdNum].getAttribute("data-code")
+        listOfProducts.add(productID)
+        return listOfProducts
+
+
+    }
+
+    fun clickOnGoToCartButton(){
+        elements().performClick(buttonGoToCart)
     }
 
     fun areThereAnyVirtualProductsOnPage(): Boolean{
@@ -67,7 +80,7 @@ class ResultsPage : AbstractTechnicalPage() {
     }
 
     fun countAddableObjects():Int{
-        val allMatchingElements: List<WebElement> = elements().findElements(addToBasketUni)
+        val allMatchingElements: List<WebElement> = elements().findElements(addToCartUni)
         val numberOfElements = allMatchingElements.size
         val generatorNumber = (numberOfElements - 1)
         return generatorNumber
@@ -76,13 +89,13 @@ class ResultsPage : AbstractTechnicalPage() {
 
 
 
-    fun clickOnAddToBasket() {
+    fun clickOnAddToCart() {
 
-        elements().performClick(toBasket)
+        elements().performClick(toCart)
     }
     
     fun selectAddProductButton(productOrder: Number){
-        toBasket = ElementDef(ComponentType.ANY,"Do Košíku",By.xpath("(//div[contains(@class,'inStockAvailability')])[${productOrder}]//a[@class='btnk1'and contains(@href,'boxOrder')]"))
+        toCart = ElementDef(ComponentType.ANY,"Do Košíku",By.xpath("(//div[contains(@class,'inStockAvailability')])[${productOrder}]//a[@class='btnk1'and contains(@href,'boxOrder')]"))
     }
 
     fun returnToMainPage()= elements().performClick(alzaHome)

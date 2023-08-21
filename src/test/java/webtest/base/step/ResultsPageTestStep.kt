@@ -10,7 +10,7 @@ class ResultsPageTestStep: AbstractTestStep() {
         return resultsPage.countAddableObjects()
     }
 
-    fun selectAddToBasket(sel: Int){
+    fun selectAddToCart(sel: Int){
         resultsPage.selectAddProductButton(sel)
     }
 
@@ -43,17 +43,26 @@ class ResultsPageTestStep: AbstractTestStep() {
 
     fun addRandomNonVirtualProductToCart(addProd: Int){
 
-        selectAddToBasket(addProd)
+        selectAddToCart(addProd)
 
         if (!isVirtual()){
-            
-            clickOnAddToBasket()
-
+            clickOnAddToCart()
+        }else{
+            clickOnAddToCart()
+            clickOnAddVirtualToCart()
         }
     }
 
+    fun addAnyRandomProductToCart(addProd: Int){
+
+        selectAddToCart(addProd)
+        clickOnAddToCart()
+
+    }
+
     fun anyVirtualProducts(): Boolean {
-        return resultsPage.areThereAnyVirtualProductsOnPage()
+        val virtual = resultsPage.areThereAnyVirtualProductsOnPage()
+        return virtual
     }
 
 

@@ -5,7 +5,7 @@ import webtest.base.ComponentType
 import webtest.base.ElementDef
 import webtest.page.common.AbstractTechnicalPage
 
-class AddedToBasketPage: AbstractTechnicalPage() {
+class AddedToCartPage: AbstractTechnicalPage() {
 
     override fun isOpen(): Boolean {
         TODO("Not yet implemented")
