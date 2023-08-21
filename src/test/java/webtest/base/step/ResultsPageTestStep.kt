@@ -15,9 +15,12 @@ class ResultsPageTestStep: AbstractTestStep() {
     }
 
 
+    fun clickOnAddToCart(){
+        resultsPage.clickOnAddToCart()
+    }
 
-    fun clickOnAddToBasket(){
-        resultsPage.clickOnAddToBasket()
+    fun clickOnAddVirtualToCart(){
+        resultsPage.clickOnAddVirtualToCart()
     }
 
     fun isVirtual(): Boolean{
@@ -41,7 +44,7 @@ class ResultsPageTestStep: AbstractTestStep() {
         resultsPage.returnToMainPage()
     }
 
-    fun addRandomNonVirtualProductToCart(addProd: Int){
+    fun addFirstRandomAnyProductToCart(addProd: Int){
 
         selectAddToCart(addProd)
 
@@ -65,7 +68,8 @@ class ResultsPageTestStep: AbstractTestStep() {
         return virtual
     }
 
-
-
+    fun clickOnGoToCartButton(){
+        resultsPage.clickOnGoToCartButton()
+    }
 
 }

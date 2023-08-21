@@ -89,7 +89,10 @@ class ResultsPage : AbstractTechnicalPage() {
     }
 
 
+    fun clickOnAddVirtualToCart() {
 
+        elements().performClick(virtualToCart)
+    }
 
     fun clickOnAddToCart() {
 

@@ -41,14 +41,15 @@ class BaseTest : AbstractTestNew() {
         closeAdd()
         goRandomlyThroughCatalog()
         selectRandomFilter()
-        buyRandomNonVirtualProduct()
+        buyfirstRandomAnyProduct()
         returnToMainPage()
         clickRandomLeftMenuItem()
         closeAdd()
         goRandomlyThroughCatalog()
         selectRandomFilter()
-        buyRandomNonVirtualProduct()
-        returnToMainPage()
+        buyRandomAnyProduct()
+        goToShoppingCart()
+        verifySameProductsPresent()
 
 
 

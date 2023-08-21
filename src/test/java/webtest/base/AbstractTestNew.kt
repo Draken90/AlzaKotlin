@@ -112,16 +112,13 @@ abstract class AbstractTestNew {
 
     fun selectRandomFilter() = resultsPageTestStep.selectFilter()
 
-    fun buyRandomNonVirtualProduct() {
-        resultsPageTestStep.addRandomNonVirtualProductToCart(randomizer.randomizeSelection(resultsPageTestStep.countItemsForRandomize()))
+    fun buyfirstRandomAnyProduct() {
+        resultsPageTestStep.addFirstRandomAnyProductToCart(randomizer.randomizeSelection(resultsPageTestStep.countItemsForRandomize()))
     }
 
     fun buyRandomAnyProduct(){
         resultsPageTestStep.addAnyRandomProductToCart(randomizer.randomizeSelection(resultsPageTestStep.countItemsForRandomize()))
     }
-
-
-
 
 
 
