@@ -13,8 +13,8 @@ class CatalogPage: AbstractTechnicalPage(){
 
     fun countClickableObjects():Int{
 
-        val leftMenuObject: ElementDef = ElementDef(ComponentType.BUTTON,"Catalog Button", By.className("catalogLocalTitlePage-alz-4"))
-        val allMatchingElements: List<WebElement> = elements().findElements(leftMenuObject)
+        val catalogObject: ElementDef = ElementDef(ComponentType.BUTTON,"Catalog Button", By.className("catalogLocalTitlePage-alz-4"))
+        val allMatchingElements: List<WebElement> = elements().findElements(catalogObject)
         val numberOfElements = allMatchingElements.size
         val generatorNumber = (numberOfElements-1)
         return generatorNumber

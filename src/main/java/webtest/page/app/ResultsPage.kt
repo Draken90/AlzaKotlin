@@ -16,17 +16,27 @@ class ResultsPage : AbstractTechnicalPage() {
     private var electronicProduct: ElementDef = ElementDef(ComponentType.ANY, "Virtual product", By.xpath("//div[contains(@class,'inStockAvailability virtual')]"))
     private var onStore: ElementDef = ElementDef(ComponentType.ANY, "Na Skladě", By.xpath("//div[@data-testid='alza-and-partner-branches']"))
     private var addToBasketUni: ElementDef = ElementDef(ComponentType.BUTTON, "Do Košíku", By.xpath("//div[contains(@class,'inStockAvailability')]//a[@class='btnk1'and contains(@href,'boxOrder')]"))
+    var toBasket = ElementDef(ComponentType.ANY,"Do Košíku",By.xpath("(//div[contains(@class,'inStockAvailability')])[1]//a[@class='btnk1'and contains(@href,'boxOrder')]"))
     private val alzaHome: ElementDef = ElementDef(ComponentType.ANY, "Alza Homepage", By.xpath("//a[contains(@title,'Přejít na hlavní stránku')]"))
     private val onlyNewProduct: ElementDef = ElementDef(ComponentType.ANY, "Jen nové", By.id("hlCommodityStatusNew"))
 
 
     fun checkVirtual(): Boolean {
 
+    val element = elements().findElement(toBasket)
+        val virtualCheck = element.getAttribute("class")
+        var virtual = virtualCheck.contains("virtual")
+        return virtual
+
+
+
+    }
+
+    fun areThereAnyVirtualProductsOnPage(): Boolean{
+
         val allMatchingElements: List<WebElement> = elements().findElements(electronicProduct)
         val numberOfElements = allMatchingElements.size
-        return numberOfElements!=0
-
-
+        return numberOfElements>0
 
     }
 
@@ -39,7 +49,7 @@ class ResultsPage : AbstractTechnicalPage() {
     fun checkOnlyNew() {
             elements().performClick(onlyNewProduct)
     }
-    fun clickFilter() {
+    fun clickRandomFilter() {
         val filterNumber = (nextInt(5) + 1)
         var filterType = ""
         when (filterNumber){
@@ -66,10 +76,13 @@ class ResultsPage : AbstractTechnicalPage() {
 
 
 
-    fun clickAddtoBasket(productOrder: Number) {
+    fun clickOnAddToBasket() {
 
-        val toBasket = ElementDef(ComponentType.ANY,"Do Košíku",By.xpath("(//div[contains(@class,'inStockAvailability')])[${productOrder}]//a[@class='btnk1'and contains(@href,'boxOrder')]"))
         elements().performClick(toBasket)
+    }
+    
+    fun selectAddProductButton(productOrder: Number){
+        toBasket = ElementDef(ComponentType.ANY,"Do Košíku",By.xpath("(//div[contains(@class,'inStockAvailability')])[${productOrder}]//a[@class='btnk1'and contains(@href,'boxOrder')]"))
     }
 
     fun returnToMainPage()= elements().performClick(alzaHome)

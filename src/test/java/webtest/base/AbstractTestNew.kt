@@ -8,6 +8,7 @@ import org.testng.annotations.*
 import webtest.base.step.CatalogPageTestStep
 import webtest.base.step.LeftMenuPageTestStep
 import webtest.base.step.RandomizerTestStep
+import webtest.base.step.ResultsPageTestStep
 import webtest.page.app.MainPage
 import webtest.page.app.ResultsPage
 import java.io.File
@@ -22,7 +23,7 @@ abstract class AbstractTestNew {
     val leftMenuTestStep = LeftMenuPageTestStep()
     val randomizer = RandomizerTestStep()
     val catalogPageTestStep = CatalogPageTestStep()
-    val ResultsPage = ResultsPage()
+    val resultsPageTestStep = ResultsPageTestStep()
 
     var productPrice = 0
     var leftover = 1000
@@ -77,7 +78,7 @@ abstract class AbstractTestNew {
         return currentPrice
     }
 
-    fun goThroughCatalog(){
+    fun goRandomlyThroughCatalog(){
         while ((catalogPageTestStep.countOptionsForRandomize())>-1){
             catalogPageTestStep.clickOnCatalogOption(randomizer.randomizeSelection(catalogPageTestStep.countOptionsForRandomize()))
         }
@@ -97,34 +98,44 @@ abstract class AbstractTestNew {
         return MainPage()
     }
 
+    fun selectOnStore() = resultsPageTestStep.clickOnOnStore()
 
+    fun selectOnlyNew() = resultsPageTestStep.clickOnOnlyNew()
 
+    fun selectRandomFilter() = resultsPageTestStep.selectFilter()
 
-
-
-    fun isVirtual(): Boolean {
-        val ResultsPage = ResultsPage()
-        return ResultsPage.checkVirtual()
+    fun buyRandomNonVirtualProduct() {
+        resultsPageTestStep.addRandomNonVirtualProductToCart(randomizer.randomizeSelection(resultsPageTestStep.countItemsForRandomize()))
     }
 
 
-        fun buyProduct(prodOrder:Number): ResultsPage{
-            val ResultsPage = ResultsPage()
-            Thread.sleep(5000)
-            ResultsPage.clickAddtoBasket(prodOrder)
 
-        return ResultsPage()
+
+
+
+    fun anyVirtualObjects(): Boolean {
+
+        return resultsPageTestStep.anyVirtualProducts()
     }
 
-    fun returnToMainPage(): ResultsPage{
-        val ResultsPage = ResultsPage()
-        ResultsPage.returnToMainPage()
-        return ResultsPage()
+    fun filterNewAndOnStore(){
+        if (!anyVirtualObjects()){
+            selectOnStore()
+            selectOnlyNew()
+        }
     }
+
+
+
 
     fun closeAdd(): ResultsPage {
             catalogPageTestStep.getRidOfAdvert()
         return ResultsPage()
+    }
+
+    fun returnToMainPage(): MainPage{
+        resultsPageTestStep.returnToMainPage()
+        return MainPage()
     }
 
     fun printResults() = println("Cílová cena byla $budget, Celková cena nákupu činí $currentPrice a zbylo $leftover KČ")

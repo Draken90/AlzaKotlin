@@ -10,14 +10,18 @@ class ResultsPageTestStep: AbstractTestStep() {
         return resultsPage.countAddableObjects()
     }
 
-
-
-    fun clickOnAddToBasket(genNum: Int){
-        resultsPage.clickAddtoBasket(genNum)
+    fun selectAddToBasket(sel: Int){
+        resultsPage.selectAddProductButton(sel)
     }
 
-    fun isVirtual(){
-        resultsPage.checkVirtual()
+
+
+    fun clickOnAddToBasket(){
+        resultsPage.clickOnAddToBasket()
+    }
+
+    fun isVirtual(): Boolean{
+       return resultsPage.checkVirtual()
     }
 
     fun clickOnOnStore(){
@@ -29,13 +33,30 @@ class ResultsPageTestStep: AbstractTestStep() {
     }
 
     fun selectFilter(){
-        resultsPage.clickFilter()
+        resultsPage.clickRandomFilter()
     }
 
     fun returnToMainPage(){
 
         resultsPage.returnToMainPage()
     }
+
+    fun addRandomNonVirtualProductToCart(addProd: Int){
+
+        selectAddToBasket(addProd)
+
+        if (!isVirtual()){
+            
+            clickOnAddToBasket()
+
+        }
+    }
+
+    fun anyVirtualProducts(): Boolean {
+        return resultsPage.areThereAnyVirtualProductsOnPage()
+    }
+
+
 
 
 }

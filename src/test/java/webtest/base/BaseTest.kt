@@ -5,7 +5,7 @@ import org.testng.annotations.Test
 
 class BaseTest : AbstractTestNew() {
 
-    @Test
+    /*@Test
     fun exampleTest() {
         currentPrice = 0
         budget = generateBudget()
@@ -28,7 +28,7 @@ class BaseTest : AbstractTestNew() {
         }*/
         printResults()
 
-    }
+    }*/
 
     @Test
     fun test2(){
@@ -37,7 +37,19 @@ class BaseTest : AbstractTestNew() {
         acceptCookies()
         clickRandomLeftMenuItem()
         closeAdd()
-        goThroughCatalog()
+        goRandomlyThroughCatalog()
+        filterNewAndOnStore()
+        selectRandomFilter()
+        buyRandomNonVirtualProduct()
+        returnToMainPage()
+        clickRandomLeftMenuItem()
+        closeAdd()
+        goRandomlyThroughCatalog()
+        filterNewAndOnStore()
+        selectRandomFilter()
+        buyRandomNonVirtualProduct()
+        returnToMainPage()
+
 
 
 
