@@ -10,6 +10,8 @@ class CatalogPage: AbstractTechnicalPage(){
     override fun isOpen(): Boolean {
         TODO("Not yet implemented")
     }
+
+    private val choiceKomponenty: ElementDef = ElementDef(ComponentType.BUTTON, "Komponenty", By.xpath("//a[@href='https://www.alza.cz/komponenty/18852654.htm']"))
     fun countClickableObjects():Int{
 
         val catalogObject: ElementDef = ElementDef(ComponentType.BUTTON,"Catalog Button", By.className("catalogLocalTitlePage-alz-4"))
@@ -18,6 +20,8 @@ class CatalogPage: AbstractTechnicalPage(){
         val generatorNumber = (numberOfElements-1)
         return generatorNumber
     }
+
+    fun clickOnComponentsButton()=elements().performClick(choiceKomponenty)
 
 
 

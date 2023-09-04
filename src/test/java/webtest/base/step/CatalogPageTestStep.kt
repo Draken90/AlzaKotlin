@@ -12,6 +12,8 @@ class CatalogPageTestStep: AbstractTestStep() {
     fun clickOnCatalogOption(genNum: Int){
         catalogPage.clickOnCatalogOption(genNum)
     }
+    
+    fun chooseComponents()=catalogPage.clickOnComponentsButton()
 
     fun getRidOfAdvert(){
         if (catalogPage.seekForAdvert()){

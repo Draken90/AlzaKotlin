@@ -16,6 +16,8 @@ class LeftMenuPageTestStep: AbstractTestStep() {
         leftMenuPage.clickOnLeftMenuOption(genNum)
     }
 
+    fun clickOnComputersOption() = leftMenuPage.clickOnOptionComputersLeftMenuButton()
+
 
 
 

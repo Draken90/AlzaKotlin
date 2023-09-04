@@ -9,6 +9,8 @@ import webtest.page.common.AbstractTechnicalPage
 
 class LeftMenuPage: AbstractTechnicalPage() {
 
+    private val optionComputersLeftMenuButton : ElementDef = ElementDef(ComponentType.BUTTON, "Počítače",By.xpath("//a[@href='/pocitace-a-notebooky']"))
+
     override fun isOpen(): Boolean {
         TODO("Not yet implemented")
     }
@@ -28,4 +30,6 @@ class LeftMenuPage: AbstractTechnicalPage() {
         val leftMenuOption: ElementDef = ElementDef(ComponentType.BUTTON, "MenuOption", By.xpath("//li[contains(@class,'leftMenuItem')][${productNumber}]/a[contains(@class,'catLink')]"))
         elements().performClick(leftMenuOption)
     }
+
+    fun clickOnOptionComputersLeftMenuButton()=elements().performClick(optionComputersLeftMenuButton)
 }
