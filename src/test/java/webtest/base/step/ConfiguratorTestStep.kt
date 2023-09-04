@@ -27,4 +27,15 @@ class ConfiguratorTestStep: AbstractTestStep() {
         }
     }
 
+    fun fillConfiguratorRest(){
+        ConfiguratorPage().clickOnPCCompleteSet()
+        ConfiguratorPage().clickOnPCMontage()
+        ConfiguratorPage().clickOnPCMonitor()
+        ConfiguratorPage().clickOnKeyboard()
+        ConfiguratorPage().clickOnMouse()
+        ConfiguratorPage().clickOnOperationSystem()
+        ConfiguratorPage().clickOnPCSetToKart()
+
+    }
+
 }

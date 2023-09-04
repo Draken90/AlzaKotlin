@@ -18,6 +18,7 @@ class ConfiguratorTest: AbstractTestNew() {
         ConfiguratorTestStep().setFilter(5)
         ConfiguratorTestStep().startConfigurator()
         ConfiguratorTestStep().fillConfiguratorFirstHalf()
+        ConfiguratorTestStep().fillConfiguratorRest()
 
 
     }
